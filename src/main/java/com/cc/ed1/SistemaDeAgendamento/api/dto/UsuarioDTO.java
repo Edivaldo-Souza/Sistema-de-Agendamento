@@ -1,10 +1,9 @@
-package com.cc.ed1.SistemaDeAgendamento.domain.entities;
+package com.cc.ed1.SistemaDeAgendamento.api.dto;
 
-
-public class Atendente {
+public class UsuarioDTO {
 	private long id;
 	private String nome;
-	private String cpf;
+	private boolean isAdmin;
 	public long getId() {
 		return id;
 	}
@@ -17,10 +16,10 @@ public class Atendente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getCpf() {
-		return cpf;
+	public boolean isAdmin() {
+		return isAdmin;
 	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 }

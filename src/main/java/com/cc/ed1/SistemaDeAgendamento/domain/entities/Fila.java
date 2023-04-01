@@ -5,8 +5,9 @@ public class Fila<T>{
     private Object[] array;
     private int primeiro;
     private int ultimo;
+    private final int ACRESCIMO = 3;
 
-    Fila(int max){
+    public Fila(int max){
         this.max = max;
         this.array = new Object[max];
         this.primeiro = -1;
@@ -21,13 +22,25 @@ public class Fila<T>{
             if(primeiro<0){
                 primeiro = 0;
             }
+            
+        }
+        else {
+        	Object novoArray[] = new Object[max+ACRESCIMO];
+        	for(int i = 0; i<max; i++) {
+        		novoArray[i] = this.array[i]; 
+        	}
+        	
+        	max += ACRESCIMO;
+        	ultimo++;
+        	novoArray[ultimo] = obj;
+        	this.array = novoArray;
         }
         
     }
 
     @SuppressWarnings("unchecked")
     public T remover(){
-        if(primeiro>0){
+        if(!isEmpty()){
         	T first = (T) this.array[primeiro];
 
             this.array[primeiro] = null;
@@ -36,6 +49,10 @@ public class Fila<T>{
                 if(((ultimo-i)+1)>=max || this.array[(ultimo-i)+1]==null){
                     this.array[(ultimo-i)] = null;
                     ultimo = (ultimo-i)-1;
+                    if(this.array[0]==null) {
+                    	ultimo = -1;
+                    	primeiro = -1;
+                    }
                     break;
                 }
                 this.array[ultimo-i] = this.array[(ultimo-i)+1];
@@ -58,7 +75,7 @@ public class Fila<T>{
         if(primeiro<0){
             return true;
         }
-        else return true;
+        else return false;
     }
 
     public boolean isFull(){
@@ -66,6 +83,10 @@ public class Fila<T>{
             return true;
         }
         else return false;
+    }
+    
+    public int getMax() {
+    	return max; 
     }
 
 }
